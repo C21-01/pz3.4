@@ -1,0 +1,109 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <title>Display Arrays, Circle, and Date</title> 
+</head> 
+<body> 
+ 
+  <h1>Display Arrays, Circle, and Date</h1> 
+ 
+  <!-- Елемент для відображення поточної дати --> 
+  <p id="currentDate"></p> 
+ 
+  <!-- Елементи для відображення результатів --> 
+  <ul id="resultsList"></ul> 
+ 
+  <!-- Елемент для відображення кола --> 
+  <canvas id="circleCanvas" width="200" height="200" style="border:1px solid black;"></canvas> 
+ 
+  <script> 
+    // Функція для зміни масиву 
+    function modifyArray(arr) { 
+      arr.unshift("start"); // Додає "start" на початок масиву 
+      arr.pop(); // Видаляє останній елемент масиву 
+      arr[1] = "modified"; // Змінює значення другого елементу на "modified" 
+      return arr; // Повертає модифікований масив 
+    } 
+ 
+    // Функція для операцій з масивом 
+    function arrayOperations(arr) { 
+      arr.push("end"); // Додає "end" в кінець масиву 
+      arr.shift(); // Видаляє перший елемент масиву 
+      arr.splice(3, 0, "middle"); // Вставляє "middle" після третього елементу 
+      return arr; // Повертає модифікований масив 
+    } 
+ 
+    // Функція для перевірки, чи число ціле 
+    function checkInteger(num) { 
+      return Number.isInteger(num) ? "Число ціле" : "Число не ціле"; 
+    } 
+ 
+    // Функція для відображення поточної дати та часу 
+    function displayCurrentDate() { 
+      let currentDate = new Date().toLocaleDateString("uk-UA"); 
+      return "Поточна дата: " + currentDate; 
+    } 
+ 
+    // Реальні дані для функцій та масивів 
+    let myArray = ["apple", "banana", "orange", "grape", "kiwi"]; 
+    let myArray2 = [10, 20, 30, 40, 50]; 
+    let radius = 50; 
+ 
+    // Отримання елементів для відображення результатів 
+    let resultsList = document.getElementById("resultsList"); 
+    let canvas = document.getElementById("circleCanvas"); 
+    let ctx = canvas.getContext("2d"); 
+ 
+    // Отримання елемента для відображення поточної дати 
+    let currentDateElement = document.getElementById('currentDate'); 
+ 
+    // Оновлення поточної дати 
+    function updateCurrentDate() { 
+      currentDateElement.textContent = displayCurrentDate(); 
+    } 
+ 
+    // Виклик функції оновлення дати 
+    updateCurrentDate(); 
+ 
+    // Результат для modifyArray 
+    let modified = modifyArray(myArray); 
+    let modifyArrayResult = document.createElement("li"); 
+    modifyArrayResult.textContent = "Результат для modifyArray: " + modified; 
+    resultsList.appendChild(modifyArrayResult); 
+ 
+    // Результат для arrayOperations 
+    let modifiedArray = arrayOperations(myArray2); 
+    let arrayOperationsResult = document.createElement("li"); 
+    arrayOperationsResult.textContent = "Результат для arrayOperations: " + modifiedArray; 
+    resultsList.appendChild(arrayOperationsResult); 
+ 
+    // Результат для calculateCircleArea 
+    let calculateCircleAreaResult = document.createElement("li"); 
+    calculateCircleAreaResult.textContent = "Площа кола з радіусом " + radius + ": " + (Math.PI * radius ** 2).toFixed(2); 
+    resultsList.appendChild(calculateCircleAreaResult); 
+ 
+    // Результат для checkInteger 
+    let checkIntegerResult = document.createElement("li"); 
+    checkIntegerResult.textContent = "Результат для checkInteger(5.5): " + checkInteger(5.5); 
+    resultsList.appendChild(checkIntegerResult); 
+ 
+    // Малювання кола на canvas 
+    ctx.beginPath(); 
+    ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI); 
+    ctx.fillStyle = 'lightblue'; 
+    ctx.fill(); 
+    ctx.lineWidth = 2; 
+    ctx.strokeStyle = 'black'; 
+    ctx.stroke(); 
+ 
+    // Відображення радіусу кола 
+    let radiusText = "Радіус кола: " + radius; 
+    ctx.font = "14px Arial"; 
+    ctx.fillStyle = "black"; 
+    ctx.fillText(radiusText, canvas.width / 2 - 40, canvas.height / 2 + 60); 
+ 
+  </script> 
+ 
+</body> 
+</html>
